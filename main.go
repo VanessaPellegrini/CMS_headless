@@ -1,1 +1,5 @@
-//not implemented
+package main
+
+func main() {
+
+}

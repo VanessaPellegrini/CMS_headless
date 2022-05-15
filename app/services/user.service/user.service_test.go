@@ -11,8 +11,8 @@ import (
 func TestCreate(t *testing.T) {
 
 	user := m.User{
-		FirstName: "John",
-		Email:     "john@example.com",
+		FirstName: "Carlos",
+		Email:     "Carlos@example.com",
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}

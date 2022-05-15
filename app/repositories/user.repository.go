@@ -5,6 +5,7 @@ import (
 
 	"github.com/VanessaPellegrini/CMS_headless/app/infrastructure/mongodb"
 	m "github.com/VanessaPellegrini/CMS_headless/app/models"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 var collection = mongodb.GetCollection("users")
@@ -25,6 +26,25 @@ func Create(user m.User) error {
 func Read() (m.Users, error) {
 
 	var users m.Users
+
+	filter := bson.D{}
+
+	cur, err := collection.Find(ctx, filter)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for cur.Next(ctx) {
+		var user m.User
+		err = cur.Decode(&user)
+
+		if err != nil {
+			return nil, err
+		}
+
+		users = append(users, &user)
+	}
 
 	return users, nil
 }
